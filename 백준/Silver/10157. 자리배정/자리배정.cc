@@ -9,7 +9,6 @@ int main()
                 printf("0\n");
                 return 0;
         }
-        C--;
         int x = 1, y = 0, p = 1;
         int seats = 0;
         /*골뱅이 배열
@@ -25,7 +24,7 @@ int main()
                                 return 0;
                         }
                 }
-                for (int i = 1; i <= C; i++) {
+                for (int i = 1; i < C; i++) {
                         x += p;
                         seats++;
                         if (seats == K) {
