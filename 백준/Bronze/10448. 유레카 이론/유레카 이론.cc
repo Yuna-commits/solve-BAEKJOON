@@ -2,9 +2,6 @@
 using namespace std;
 int T;
 int triArr[50];
-int triangular(int n) {
-        return (n * (n + 1) / 2);
-}
 int solve(int X) {
         //삼각수 3개로 X를 만들 수 있는지 확인
         for (int i = 1; i <= 45; i++) {
