@@ -1,60 +1,39 @@
 #include<iostream>
 #include<algorithm>
-#include <climits>
+#include<climits>
 #define MAX_SIZE 50
 int N, M;
 char BOARD[MAX_SIZE][MAX_SIZE];
-char WB[8][8] = {
-        'W','B','W','B','W','B','W','B',
-        'B','W','B','W','B','W','B','W',
-        'W','B','W','B','W','B','W','B',
-        'B','W','B','W','B','W','B','W',
-        'W','B','W','B','W','B','W','B',
-        'B','W','B','W','B','W','B','W',
-        'W','B','W','B','W','B','W','B',
-        'B','W','B','W','B','W','B','W'
-};
-char BW[8][8] = {
-        'B','W','B','W','B','W','B','W',
-        'W','B','W','B','W','B','W','B',
-        'B','W','B','W','B','W','B','W',
-        'W','B','W','B','W','B','W','B',
-        'B','W','B','W','B','W','B','W',
-        'W','B','W','B','W','B','W','B',
-        'B','W','B','W','B','W','B','W',
-        'W','B','W','B','W','B','W','B'
-};
-int WB_cmp(int x, int y) {
+char NOT(char now) {//다음 칸의 색 결정
+        return now == 'B' ? 'W' : 'B';
+}
+//(0, 0)이 start = W로 시작하는 경우, start = B로 시작하는 경우의 다시 칠해야 하는 칸 개수
+//기존 보드의 가로세로 8칸씩 잡아서 "모든 경우의 수 탐색"
+int get_cnt(int x, int y, char start) {
         int cnt = 0;
+        char row_start = start;
         for (int i = 0; i < 8; i++) {
+                char next = row_start;
                 for (int j = 0; j < 8; j++) {
-                        if (WB[i][j] != BOARD[x + i][y + j]) cnt++;
+                        if (BOARD[x + i][y + j] != next) cnt++;
+                        next = NOT(next);
                 }
+                //배열의 한 행이 끝나면 다음 행의 시작 색 결정
+                row_start = NOT(row_start);
         }
         return cnt;
 }
-int BW_cmp(int x, int y) {
-        int cnt = 0;
-        for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
-                        if (BW[i][j] != BOARD[x + i][y + j]) cnt++;
-                }
-        }
-        return cnt;
-}
-int main() {
+int main()
+{
         using namespace std;
         cin >> N >> M;
         for (int i = 0; i < N; i++) {
                 for (int j = 0; j < M; j++) cin >> BOARD[i][j];
         }
         int ans = INT_MAX;
-        //WB_cmp, BW_cmp 함수
-        //> 기존 보드와 WB, BW 배열을 가로세로 8칸씩 잡고 비교
-        //> > 둘 중 더 작은 값을 ans에 저장
         for (int i = 0; i + 8 <= N; i++) {
                 for (int j = 0; j + 8 <= M; j++) {
-                        int tmp = min(WB_cmp(i, j), BW_cmp(i, j));
+                        int tmp = min(get_cnt(i, j, 'W'), get_cnt(i, j, 'B'));
                         if (ans > tmp) ans = tmp;
                 }
         }
