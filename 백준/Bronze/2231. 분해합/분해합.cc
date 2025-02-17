@@ -1,21 +1,20 @@
 #include<iostream>
+using namespace std;
 int N;
 int solve() {
-        //자연수 1~(N-1)의 분해합을 구했을 때 N이 나오는 경우
         for (int i = 1; i < N; i++) {
-                int sum = i;
                 int tmp = i;
-                while (tmp > 0) {
-                        sum += (tmp % 10);
+                int ans = tmp;
+                while (tmp) {
+                        ans += (tmp % 10);
                         tmp /= 10;
                 }
-                if (sum == N) return i;
+                if (ans == N) return i;
         }
-        return 0;
+        return 0;//생성자가 없는 경우
 }
 int main()
 {
-        using namespace std;
         cin >> N;
-        cout << solve();
+        cout << solve() << endl;
 }
