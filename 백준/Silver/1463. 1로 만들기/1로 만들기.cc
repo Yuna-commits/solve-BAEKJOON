@@ -7,9 +7,9 @@ int main()
         using namespace std;
         int N; cin >> N;
         int dp[N_SIZE];//N -> 1, dp[i] = N으로 i를 만들기 위한 연산 횟수
-        fill(dp, dp+N_SIZE, INF);//0번째부터 (N+1)개를 INF로 초기화
+        fill_n(dp, N + 1, INF);//0번째부터 (N+1)개를 INF로 초기화
         dp[N] = 0;
-        for (int i = N; i > 1; i--) {
+        for (int i = N; i >= 1; i--) {
                 if (i % 3 == 0) {
                         dp[i / 3] = min(dp[i / 3], dp[i] + 1);
                 }
