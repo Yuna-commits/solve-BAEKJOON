@@ -31,10 +31,10 @@ public:
         }
         int moveRobot(int d) {//유효하지 않으면 return 0
                 switch (nowD) {
-                case 'e':  x += d; break;
-                case 'w': x -= d; break;
-                case 'n':y -= d;  break;
-                case 's': y += d;  break;
+                case 'e': y += d; break;
+                case 'w': y -= d; break;
+                case 'n': x -= d; break;
+                case 's': x += d; break;
                 }
                 if (x<0 || x>M || y<0 || y>M) return 0;
                 else return 1;
@@ -56,5 +56,5 @@ int main() {
                 }
                 else rob.setDirection(d);
         }
-        cout << rob.x << " " << rob.y;
+        cout << rob.y << " " << rob.x;
 }
