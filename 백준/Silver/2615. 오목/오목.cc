@@ -10,7 +10,6 @@ using namespace std;
 int dx[] = { -1, 0, 1, 1 };
 int dy[] = { 1,1,1,0 };
 int Baduk[MAX_SIZE][MAX_SIZE];
-int ansX, ansY;
 int isValid(int x, int y) {
         return (0 < x && x < MAX_SIZE && 0 < y && y < MAX_SIZE);
 }
